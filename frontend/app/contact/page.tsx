@@ -101,24 +101,74 @@ export default function ContactPage() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
 
-    // Temporary frontend-only submission.
-    // This will be replaced with the Spring Boot API call.
-    console.log("Contact form data:", form);
+    setSubmitted(false);
+    setError("");
+    setLoading(true);
 
-    setSubmitted(true);
+    try {
+      const apiUrl =
+        process.env.NEXT_PUBLIC_API_URL ||
+        "http://localhost:8080";
+
+      const response = await fetch(
+        `${apiUrl}/api/v1/contact`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data?.message ||
+          "Unable to submit your message. Please try again."
+        );
+      }
+
+      // Success
+      setSubmitted(true);
+
+      // Clear form after successful submission
+      setForm({
+        name: "",
+        email: "",
+        mobileNumber: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Contact form error:", error);
+
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again later."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <main className="min-h-screen px-6 pb-24 pt-32">
       <div className="mx-auto max-w-5xl">
 
-        {/* =========================================================
+        {/* =====================================================
             HEADER
-        ========================================================= */}
+        ===================================================== */}
 
         <div className="mb-12 text-center">
 
@@ -137,9 +187,9 @@ export default function ContactPage() {
 
         </div>
 
-        {/* =========================================================
+        {/* =====================================================
             CONTACT FORM
-        ========================================================= */}
+        ===================================================== */}
 
         <form
           onSubmit={handleSubmit}
@@ -208,7 +258,7 @@ export default function ContactPage() {
 
           <div className="grid gap-5 md:grid-cols-2">
 
-            {/* Mobile Number */}
+            {/* Mobile */}
 
             <div>
               <label
@@ -292,29 +342,152 @@ export default function ContactPage() {
             />
           </div>
 
-          {/* Success Message */}
+          {/* =====================================================
+              SUCCESS MESSAGE
+          ===================================================== */}
 
           {submitted && (
-            <div className="rounded-lg border border-green-500/20 bg-green-500/10 p-4 text-sm text-green-400">
-              Thanks! Your message has been submitted.
-              The backend connection will be added next.
+            <div className="flex items-start gap-3 rounded-lg border border-green-500/20 bg-green-500/10 p-4 text-sm text-green-400">
+
+              {/* Check Icon */}
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="mt-0.5 h-5 w-5 shrink-0"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                />
+
+                <path
+                  d="M8 12L10.8 15L16.5 9"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+
+              <div>
+                <p className="font-medium text-green-300">
+                  Message submitted successfully!
+                </p>
+
+                <p className="mt-1 text-green-400/80">
+                  Thank you for reaching out. I&apos;ll get in touch
+                  with you soon.
+                </p>
+              </div>
+
             </div>
           )}
 
-          {/* Submit */}
+          {/* =====================================================
+              ERROR MESSAGE
+          ===================================================== */}
+
+          {error && (
+            <div className="flex items-start gap-3 rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-400">
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="mt-0.5 h-5 w-5 shrink-0"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                />
+
+                <path
+                  d="M12 8V13"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+
+                <circle
+                  cx="12"
+                  cy="16.5"
+                  r="1"
+                  fill="currentColor"
+                />
+              </svg>
+
+              <div>
+                <p className="font-medium text-red-300">
+                  Unable to send your message
+                </p>
+
+                <p className="mt-1 text-red-400/80">
+                  {error}
+                </p>
+              </div>
+
+            </div>
+          )}
+
+          {/* =====================================================
+              SUBMIT BUTTON
+          ===================================================== */}
 
           <button
             type="submit"
-            className="w-full rounded-lg bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3 font-medium text-white shadow-lg shadow-blue-500/10 transition hover:from-blue-500 hover:to-violet-500"
+            disabled={loading}
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3 font-medium text-white shadow-lg shadow-blue-500/10 transition hover:from-blue-500 hover:to-violet-500 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Send Message
+
+            {loading ? (
+              <>
+                {/* Loading Spinner */}
+
+                <svg
+                  className="h-5 w-5 animate-spin"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="9"
+                    stroke="currentColor"
+                    strokeOpacity="0.3"
+                    strokeWidth="2"
+                  />
+
+                  <path
+                    d="M21 12a9 9 0 0 0-9-9"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+
+                Sending...
+
+              </>
+            ) : (
+              "Send Message"
+            )}
+
           </button>
 
         </form>
 
-        {/* =========================================================
+        {/* =====================================================
             RESUME
-        ========================================================= */}
+        ===================================================== */}
 
         <div className="mt-12 rounded-2xl border border-white/10 bg-white/[0.025] p-8 text-center">
 
@@ -374,9 +547,9 @@ export default function ContactPage() {
 
         </div>
 
-        {/* =========================================================
+        {/* =====================================================
             SOCIAL LINKS
-        ========================================================= */}
+        ===================================================== */}
 
         <div className="mt-16 text-center">
 
