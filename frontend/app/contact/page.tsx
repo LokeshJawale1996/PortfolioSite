@@ -910,14 +910,14 @@ export default function ContactPage() {
             </div>
 
             {/* =================================================
-                MOBILE + SUBJECT
-            ================================================= */}
+    MOBILE + SUBJECT
+================================================= */}
 
-            <div className="grid gap-5 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
 
               {/* Mobile */}
 
-              <div>
+              <div className="min-w-0">
 
                 <label
                   htmlFor="mobileNumber"
@@ -930,7 +930,7 @@ export default function ContactPage() {
                   </span>
                 </label>
 
-                <div className="flex">
+                <div className="flex w-full min-w-0">
 
                   {/* Country Code */}
 
@@ -944,25 +944,38 @@ export default function ContactPage() {
                         )
                       }
                       aria-label="Country code"
-                      className="h-full min-w-[135px] appearance-none rounded-l-lg border border-r-0 border-white/10 bg-black/40 px-3 pr-8 text-sm text-white outline-none transition focus:border-blue-500"
+                      className="
+            h-12
+            w-[100px]
+            appearance-none
+            rounded-l-lg
+            border
+            border-r-0
+            border-white/10
+            bg-black/40
+            px-2
+            pr-7
+            text-sm
+            text-white
+            outline-none
+            transition
+            focus:border-blue-500
+            sm:w-[115px]
+            sm:px-3
+            sm:pr-8
+            md:w-[120px]
+          "
                     >
 
-                      {countries.map(
-                        (country) => (
-                          <option
-                            key={
-                              country.code
-                            }
-                            value={
-                              country.code
-                            }
-                            className="bg-gray-900 text-white"
-                          >
-                            {country.flag}{" "}
-                            {country.dialCode}
-                          </option>
-                        )
-                      )}
+                      {countries.map((country) => (
+                        <option
+                          key={country.code}
+                          value={country.code}
+                          className="bg-gray-900 text-white"
+                        >
+                          {country.flag} {country.dialCode}
+                        </option>
+                      ))}
 
                     </select>
 
@@ -972,7 +985,16 @@ export default function ContactPage() {
                       viewBox="0 0 24 24"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      className="pointer-events-none absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+                      className="
+            pointer-events-none
+            absolute
+            right-2
+            top-1/2
+            h-4
+            w-4
+            -translate-y-1/2
+            text-gray-500
+          "
                     >
                       <path
                         d="M6 9L12 15L18 9"
@@ -997,9 +1019,7 @@ export default function ContactPage() {
                         ? "9876543210"
                         : "Mobile Number"
                     }
-                    value={
-                      form.mobileNumber
-                    }
+                    value={form.mobileNumber}
                     onChange={(event) =>
                       handleMobileChange(
                         event.target.value
@@ -1010,10 +1030,29 @@ export default function ContactPage() {
                         ? 10
                         : 15
                     }
-                    className={`min-w-0 flex-1 rounded-r-lg border bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500 ${fieldErrors.mobileNumber
-                      ? "border-red-500/60"
-                      : "border-white/10"
-                      }`}
+                    className={`
+          h-12
+          min-w-0
+          w-full
+          flex-1
+          rounded-r-lg
+          border
+          bg-black/20
+          px-3
+          py-3
+          text-sm
+          text-white
+          outline-none
+          placeholder:text-gray-600
+          transition
+          focus:border-blue-500
+          sm:px-4
+          sm:text-base
+          ${fieldErrors.mobileNumber
+                        ? "border-red-500/60"
+                        : "border-white/10"
+                      }
+        `}
                   />
 
                 </div>
@@ -1022,21 +1061,19 @@ export default function ContactPage() {
 
                 {fieldErrors.mobileNumber ? (
 
-                  <p className="mt-2 text-sm text-red-400">
+                  <p className="mt-2 text-sm leading-5 text-red-400">
                     {fieldErrors.mobileNumber}
                   </p>
 
-                ) : selectedCountry ===
-                  "IN" ? (
+                ) : selectedCountry === "IN" ? (
 
-                  <p className="mt-2 text-xs text-gray-500">
-                    Enter 10 digits starting with
-                    6, 7, 8 or 9.
+                  <p className="mt-2 text-xs leading-5 text-gray-500">
+                    Enter 10 digits starting with 6, 7, 8 or 9.
                   </p>
 
                 ) : (
 
-                  <p className="mt-2 text-xs text-gray-500">
+                  <p className="mt-2 text-xs leading-5 text-gray-500">
                     Enter 6 to 15 digits.
                   </p>
 
@@ -1044,9 +1081,10 @@ export default function ContactPage() {
 
               </div>
 
+
               {/* Subject */}
 
-              <div>
+              <div className="min-w-0">
 
                 <label
                   htmlFor="subject"
@@ -1064,13 +1102,29 @@ export default function ContactPage() {
                   onChange={(event) => {
                     setForm((previous) => ({
                       ...previous,
-                      subject:
-                        event.target.value,
+                      subject: event.target.value,
                     }));
 
                     setError("");
                   }}
-                  className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
+                  className="
+        h-12
+        w-full
+        min-w-0
+        rounded-lg
+        border
+        border-white/10
+        bg-black/20
+        px-4
+        py-3
+        text-sm
+        text-white
+        outline-none
+        placeholder:text-gray-600
+        transition
+        focus:border-blue-500
+        sm:text-base
+      "
                 />
 
               </div>
