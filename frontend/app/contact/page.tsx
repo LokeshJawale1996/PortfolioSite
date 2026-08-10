@@ -44,7 +44,7 @@ const socialLinks = [
 
   {
     name: "LinkedIn",
-    username: "LinkedIn Profile",
+    username: "Lokesh Jawale",
     url: "https://www.linkedin.com/in/lokesh-jawale-fed/",
     icon: (
       <svg
@@ -95,6 +95,7 @@ export default function ContactPage() {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    mobileNumber: "",
     subject: "",
     message: "",
   });
@@ -104,6 +105,10 @@ export default function ContactPage() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // Temporary frontend-only submission.
+    // This will be replaced with the Spring Boot API call.
+    console.log("Contact form data:", form);
+
     setSubmitted(true);
   };
 
@@ -111,9 +116,12 @@ export default function ContactPage() {
     <main className="min-h-screen px-6 pb-24 pt-32">
       <div className="mx-auto max-w-5xl">
 
-        {/* Header */}
+        {/* =========================================================
+            HEADER
+        ========================================================= */}
 
         <div className="mb-12 text-center">
+
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">
             Contact
           </p>
@@ -126,73 +134,165 @@ export default function ContactPage() {
             Have a project, opportunity or just want to say hello?
             Feel free to send me a message.
           </p>
+
         </div>
 
-        {/* Contact Form */}
+        {/* =========================================================
+            CONTACT FORM
+        ========================================================= */}
 
         <form
           onSubmit={handleSubmit}
           className="space-y-5 rounded-2xl border border-white/10 bg-white/[0.025] p-6 md:p-8"
         >
+
+          {/* Name + Email */}
+
           <div className="grid gap-5 md:grid-cols-2">
 
-            <input
-              required
-              type="text"
-              placeholder="Your Name"
-              value={form.name}
-              onChange={(event) =>
-                setForm({
-                  ...form,
-                  name: event.target.value,
-                })
-              }
-              className="rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 focus:border-blue-500"
-            />
+            {/* Name */}
 
-            <input
-              required
-              type="email"
-              placeholder="Your Email"
-              value={form.email}
-              onChange={(event) =>
-                setForm({
-                  ...form,
-                  email: event.target.value,
-                })
-              }
-              className="rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 focus:border-blue-500"
-            />
+            <div>
+              <label
+                htmlFor="name"
+                className="mb-2 block text-sm font-medium text-gray-300"
+              >
+                Name
+              </label>
+
+              <input
+                id="name"
+                required
+                type="text"
+                placeholder="Your Name"
+                value={form.name}
+                onChange={(event) =>
+                  setForm({
+                    ...form,
+                    name: event.target.value,
+                  })
+                }
+                className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
+              />
+            </div>
+
+            {/* Email */}
+
+            <div>
+              <label
+                htmlFor="email"
+                className="mb-2 block text-sm font-medium text-gray-300"
+              >
+                Email
+              </label>
+
+              <input
+                id="email"
+                required
+                type="email"
+                placeholder="Your Email"
+                value={form.email}
+                onChange={(event) =>
+                  setForm({
+                    ...form,
+                    email: event.target.value,
+                  })
+                }
+                className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
+              />
+            </div>
 
           </div>
 
-          <input
-            required
-            type="text"
-            placeholder="Subject"
-            value={form.subject}
-            onChange={(event) =>
-              setForm({
-                ...form,
-                subject: event.target.value,
-              })
-            }
-            className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 focus:border-blue-500"
-          />
+          {/* Mobile + Subject */}
 
-          <textarea
-            required
-            rows={7}
-            placeholder="Your Message"
-            value={form.message}
-            onChange={(event) =>
-              setForm({
-                ...form,
-                message: event.target.value,
-              })
-            }
-            className="w-full resize-none rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 focus:border-blue-500"
-          />
+          <div className="grid gap-5 md:grid-cols-2">
+
+            {/* Mobile Number */}
+
+            <div>
+              <label
+                htmlFor="mobileNumber"
+                className="mb-2 block text-sm font-medium text-gray-300"
+              >
+                Mobile Number
+                <span className="ml-1 text-xs text-gray-500">
+                  (Optional)
+                </span>
+              </label>
+
+              <input
+                id="mobileNumber"
+                type="tel"
+                placeholder="Your Mobile Number"
+                value={form.mobileNumber}
+                onChange={(event) =>
+                  setForm({
+                    ...form,
+                    mobileNumber: event.target.value,
+                  })
+                }
+                pattern="[0-9+\-\s()]{10,15}"
+                title="Please enter a valid mobile number"
+                className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
+              />
+            </div>
+
+            {/* Subject */}
+
+            <div>
+              <label
+                htmlFor="subject"
+                className="mb-2 block text-sm font-medium text-gray-300"
+              >
+                Subject
+              </label>
+
+              <input
+                id="subject"
+                required
+                type="text"
+                placeholder="Subject"
+                value={form.subject}
+                onChange={(event) =>
+                  setForm({
+                    ...form,
+                    subject: event.target.value,
+                  })
+                }
+                className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
+              />
+            </div>
+
+          </div>
+
+          {/* Message */}
+
+          <div>
+            <label
+              htmlFor="message"
+              className="mb-2 block text-sm font-medium text-gray-300"
+            >
+              Message
+            </label>
+
+            <textarea
+              id="message"
+              required
+              rows={7}
+              placeholder="Your Message"
+              value={form.message}
+              onChange={(event) =>
+                setForm({
+                  ...form,
+                  message: event.target.value,
+                })
+              }
+              className="w-full resize-none rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
+            />
+          </div>
+
+          {/* Success Message */}
 
           {submitted && (
             <div className="rounded-lg border border-green-500/20 bg-green-500/10 p-4 text-sm text-green-400">
@@ -201,14 +301,20 @@ export default function ContactPage() {
             </div>
           )}
 
+          {/* Submit */}
+
           <button
             type="submit"
-            className="w-full rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700"
+            className="w-full rounded-lg bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3 font-medium text-white shadow-lg shadow-blue-500/10 transition hover:from-blue-500 hover:to-violet-500"
           >
             Send Message
           </button>
+
         </form>
-        {/* Resume */}
+
+        {/* =========================================================
+            RESUME
+        ========================================================= */}
 
         <div className="mt-12 rounded-2xl border border-white/10 bg-white/[0.025] p-8 text-center">
 
@@ -228,8 +334,11 @@ export default function ContactPage() {
           <a
             href="/resume.pdf"
             download="Lokesh-Jawale-Resume.pdf"
-            className="mt-6 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700"
+            className="mt-6 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3 font-medium text-white shadow-lg shadow-blue-500/10 transition hover:from-blue-500 hover:to-violet-500"
           >
+
+            {/* Download Icon */}
+
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -260,10 +369,14 @@ export default function ContactPage() {
             </svg>
 
             Download Resume
+
           </a>
 
         </div>
-        {/* Social Links */}
+
+        {/* =========================================================
+            SOCIAL LINKS
+        ========================================================= */}
 
         <div className="mt-16 text-center">
 
@@ -309,6 +422,7 @@ export default function ContactPage() {
             ))}
 
           </div>
+
         </div>
 
       </div>
