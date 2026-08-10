@@ -101,7 +101,7 @@ export default function Navbar() {
             <a
               href="/resume.pdf"
               target="_blank"
-              className="text-blue-400"
+              className="rounded-lg border border-blue-500/50 px-4 py-2 text-sm text-blue-400 transition hover:bg-blue-500/10"
             >
               Resume
             </a>
