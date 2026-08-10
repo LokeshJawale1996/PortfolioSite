@@ -2,6 +2,10 @@
 
 import { FormEvent, useState } from "react";
 
+/* ============================================================
+   SOCIAL LINKS
+============================================================ */
+
 const socialLinks = [
   {
     name: "Instagram",
@@ -91,7 +95,227 @@ const socialLinks = [
   },
 ];
 
+/* ============================================================
+   COUNTRY LIST
+============================================================ */
+
+const countries = [
+  {
+    code: "IN",
+    name: "India",
+    dialCode: "+91",
+    flag: "🇮🇳",
+  },
+  {
+    code: "US",
+    name: "United States",
+    dialCode: "+1",
+    flag: "🇺🇸",
+  },
+  {
+    code: "CA",
+    name: "Canada",
+    dialCode: "+1",
+    flag: "🇨🇦",
+  },
+  {
+    code: "GB",
+    name: "United Kingdom",
+    dialCode: "+44",
+    flag: "🇬🇧",
+  },
+  {
+    code: "AU",
+    name: "Australia",
+    dialCode: "+61",
+    flag: "🇦🇺",
+  },
+  {
+    code: "DE",
+    name: "Germany",
+    dialCode: "+49",
+    flag: "🇩🇪",
+  },
+  {
+    code: "FR",
+    name: "France",
+    dialCode: "+33",
+    flag: "🇫🇷",
+  },
+  {
+    code: "IT",
+    name: "Italy",
+    dialCode: "+39",
+    flag: "🇮🇹",
+  },
+  {
+    code: "ES",
+    name: "Spain",
+    dialCode: "+34",
+    flag: "🇪🇸",
+  },
+  {
+    code: "NL",
+    name: "Netherlands",
+    dialCode: "+31",
+    flag: "🇳🇱",
+  },
+  {
+    code: "CH",
+    name: "Switzerland",
+    dialCode: "+41",
+    flag: "🇨🇭",
+  },
+  {
+    code: "SG",
+    name: "Singapore",
+    dialCode: "+65",
+    flag: "🇸🇬",
+  },
+  {
+    code: "AE",
+    name: "United Arab Emirates",
+    dialCode: "+971",
+    flag: "🇦🇪",
+  },
+  {
+    code: "SA",
+    name: "Saudi Arabia",
+    dialCode: "+966",
+    flag: "🇸🇦",
+  },
+  {
+    code: "QA",
+    name: "Qatar",
+    dialCode: "+974",
+    flag: "🇶🇦",
+  },
+  {
+    code: "NZ",
+    name: "New Zealand",
+    dialCode: "+64",
+    flag: "🇳🇿",
+  },
+  {
+    code: "JP",
+    name: "Japan",
+    dialCode: "+81",
+    flag: "🇯🇵",
+  },
+  {
+    code: "CN",
+    name: "China",
+    dialCode: "+86",
+    flag: "🇨🇳",
+  },
+  {
+    code: "BR",
+    name: "Brazil",
+    dialCode: "+55",
+    flag: "🇧🇷",
+  },
+  {
+    code: "ZA",
+    name: "South Africa",
+    dialCode: "+27",
+    flag: "🇿🇦",
+  },
+  {
+    code: "RU",
+    name: "Russia",
+    dialCode: "+7",
+    flag: "🇷🇺",
+  },
+  {
+    code: "MY",
+    name: "Malaysia",
+    dialCode: "+60",
+    flag: "🇲🇾",
+  },
+  {
+    code: "TH",
+    name: "Thailand",
+    dialCode: "+66",
+    flag: "🇹🇭",
+  },
+  {
+    code: "ID",
+    name: "Indonesia",
+    dialCode: "+62",
+    flag: "🇮🇩",
+  },
+  {
+    code: "IE",
+    name: "Ireland",
+    dialCode: "+353",
+    flag: "🇮🇪",
+  },
+];
+
+/* ============================================================
+   VALIDATION
+============================================================ */
+
+/**
+ * Validate email address.
+ */
+const validateEmail = (email: string): boolean => {
+  const value = email.trim();
+
+  if (!value) {
+    return false;
+  }
+
+  const emailRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
+  if (!emailRegex.test(value)) {
+    return false;
+  }
+
+  if (value.includes("..")) {
+    return false;
+  }
+
+  if (/\s/.test(value)) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Validate Indian mobile number.
+ *
+ * Exactly 10 digits.
+ * First digit must be 6, 7, 8 or 9.
+ */
+const validateIndianMobile = (
+  mobile: string
+): boolean => {
+  return /^[6-9][0-9]{9}$/.test(mobile);
+};
+
+/**
+ * Generic international mobile validation.
+ *
+ * Used for countries other than India.
+ */
+const validateInternationalMobile = (
+  mobile: string
+): boolean => {
+  return /^[0-9]{6,15}$/.test(mobile);
+};
+
+/* ============================================================
+   COMPONENT
+============================================================ */
+
 export default function ContactPage() {
+  /* ==========================================================
+     FORM STATE
+  ========================================================== */
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -100,9 +324,190 @@ export default function ContactPage() {
     message: "",
   });
 
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  /* ==========================================================
+     COUNTRY STATE
+  ========================================================== */
+
+  const [selectedCountry, setSelectedCountry] =
+    useState("IN");
+
+  const selectedCountryData =
+    countries.find(
+      (country) =>
+        country.code === selectedCountry
+    ) || countries[0];
+
+  /* ==========================================================
+     UI STATE
+  ========================================================== */
+
+  const [submitted, setSubmitted] =
+    useState(false);
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const [error, setError] =
+    useState("");
+
+  const [fieldErrors, setFieldErrors] =
+    useState<{
+      email?: string;
+      mobileNumber?: string;
+    }>({});
+
+  /* ==========================================================
+     EMAIL CHANGE
+  ========================================================== */
+
+  const handleEmailChange = (
+    value: string
+  ) => {
+    setForm((previous) => ({
+      ...previous,
+      email: value,
+    }));
+
+    setSubmitted(false);
+    setError("");
+
+    if (
+      value.trim() &&
+      !validateEmail(value)
+    ) {
+      setFieldErrors((previous) => ({
+        ...previous,
+        email:
+          "Please enter a valid email address.",
+      }));
+    } else {
+      setFieldErrors((previous) => ({
+        ...previous,
+        email: undefined,
+      }));
+    }
+  };
+
+  /* ==========================================================
+     COUNTRY CHANGE
+  ========================================================== */
+
+  const handleCountryChange = (
+    countryCode: string
+  ) => {
+    setSelectedCountry(countryCode);
+
+    /*
+     * Clear mobile when changing country
+     * because validation rules may change.
+     */
+    setForm((previous) => ({
+      ...previous,
+      mobileNumber: "",
+    }));
+
+    setFieldErrors((previous) => ({
+      ...previous,
+      mobileNumber: undefined,
+    }));
+
+    setSubmitted(false);
+    setError("");
+  };
+
+  /* ==========================================================
+     MOBILE CHANGE
+  ========================================================== */
+
+  const handleMobileChange = (
+    value: string
+  ) => {
+    /*
+     * Only allow digits.
+     */
+    const onlyDigits = value.replace(
+      /\D/g,
+      ""
+    );
+
+    /*
+     * India = exactly 10 digits.
+     * Other countries = maximum 15 digits.
+     */
+    const maxLength =
+      selectedCountry === "IN"
+        ? 10
+        : 15;
+
+    const limitedValue =
+      onlyDigits.slice(0, maxLength);
+
+    setForm((previous) => ({
+      ...previous,
+      mobileNumber: limitedValue,
+    }));
+
+    setSubmitted(false);
+    setError("");
+
+    /*
+     * Mobile is optional.
+     */
+    if (!limitedValue) {
+      setFieldErrors((previous) => ({
+        ...previous,
+        mobileNumber: undefined,
+      }));
+
+      return;
+    }
+
+    /* India */
+
+    if (selectedCountry === "IN") {
+      if (
+        !validateIndianMobile(
+          limitedValue
+        )
+      ) {
+        setFieldErrors((previous) => ({
+          ...previous,
+          mobileNumber:
+            "Enter a valid 10-digit Indian mobile number starting with 6, 7, 8 or 9.",
+        }));
+      } else {
+        setFieldErrors((previous) => ({
+          ...previous,
+          mobileNumber: undefined,
+        }));
+      }
+
+      return;
+    }
+
+    /* Other countries */
+
+    if (
+      !validateInternationalMobile(
+        limitedValue
+      )
+    ) {
+      setFieldErrors((previous) => ({
+        ...previous,
+        mobileNumber:
+          "Please enter a valid mobile number.",
+      }));
+    } else {
+      setFieldErrors((previous) => ({
+        ...previous,
+        mobileNumber: undefined,
+      }));
+    }
+  };
+
+  /* ==========================================================
+     SUBMIT FORM
+  ========================================================== */
 
   const handleSubmit = async (
     event: FormEvent<HTMLFormElement>
@@ -111,6 +516,67 @@ export default function ContactPage() {
 
     setSubmitted(false);
     setError("");
+
+    /* ========================================================
+       EMAIL VALIDATION
+    ======================================================== */
+
+    if (!validateEmail(form.email)) {
+      setFieldErrors((previous) => ({
+        ...previous,
+        email:
+          "Please enter a valid email address.",
+      }));
+
+      return;
+    }
+
+    /* ========================================================
+       MOBILE VALIDATION
+    ======================================================== */
+
+    /*
+     * Mobile is optional.
+     *
+     * Only validate if the user entered a number.
+     */
+
+    if (form.mobileNumber) {
+      if (selectedCountry === "IN") {
+        if (
+          !validateIndianMobile(
+            form.mobileNumber
+          )
+        ) {
+          setFieldErrors((previous) => ({
+            ...previous,
+            mobileNumber:
+              "Enter a valid 10-digit Indian mobile number starting with 6, 7, 8 or 9.",
+          }));
+
+          return;
+        }
+      } else {
+        if (
+          !validateInternationalMobile(
+            form.mobileNumber
+          )
+        ) {
+          setFieldErrors((previous) => ({
+            ...previous,
+            mobileNumber:
+              "Please enter a valid mobile number.",
+          }));
+
+          return;
+        }
+      }
+    }
+
+    /* ========================================================
+       START API REQUEST
+    ======================================================== */
+
     setLoading(true);
 
     try {
@@ -118,18 +584,72 @@ export default function ContactPage() {
         process.env.NEXT_PUBLIC_API_URL ||
         "http://localhost:8080";
 
+      /*
+       * mobileNumber is optional.
+       *
+       * Therefore we first create the request
+       * without mobileNumber.
+       */
+      const requestBody: {
+        name: string;
+        email: string;
+        subject: string;
+        message: string;
+        mobileNumber?: string;
+      } = {
+        name: form.name.trim(),
+        email: form.email.trim(),
+        subject: form.subject.trim(),
+        message: form.message.trim(),
+      };
+
+      /*
+       * Only add mobileNumber when the user
+       * actually entered one.
+       *
+       * Example:
+       *
+       * Country = India
+       * Number  = 9876543210
+       *
+       * Result:
+       * +919876543210
+       */
+      if (form.mobileNumber) {
+        requestBody.mobileNumber =
+          `${selectedCountryData.dialCode}${form.mobileNumber}`;
+      }
+
+      /* ======================================================
+         API CALL
+      ====================================================== */
+
       const response = await fetch(
         `${apiUrl}/api/v1/contact`,
         {
           method: "POST",
+
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(form),
+
+          body: JSON.stringify(
+            requestBody
+          ),
         }
       );
 
-      const data = await response.json();
+      let data = null;
+
+      try {
+        data = await response.json();
+      } catch {
+        data = null;
+      }
+
+      /* ======================================================
+         API ERROR
+      ====================================================== */
 
       if (!response.ok) {
         throw new Error(
@@ -138,10 +658,29 @@ export default function ContactPage() {
         );
       }
 
-      // Success
+      /* ======================================================
+         SUCCESS
+      ====================================================== */
+
+      /*
+       * This changes the UI from:
+       *
+       * CONTACT FORM
+       *
+       * to:
+       *
+       * SUCCESS MESSAGE
+       */
       setSubmitted(true);
 
-      // Clear form after successful submission
+      setError("");
+
+      setFieldErrors({});
+
+      /*
+       * Clear the form so when the user clicks
+       * "Send Another Message", they get a fresh form.
+       */
       setForm({
         name: "",
         email: "",
@@ -149,8 +688,16 @@ export default function ContactPage() {
         subject: "",
         message: "",
       });
+
+      /*
+       * Reset country to India.
+       */
+      setSelectedCountry("IN");
     } catch (error) {
-      console.error("Contact form error:", error);
+      console.error(
+        "Contact form error:",
+        error
+      );
 
       setError(
         error instanceof Error
@@ -162,13 +709,17 @@ export default function ContactPage() {
     }
   };
 
+  /* ==========================================================
+     RENDER
+  ========================================================== */
+
   return (
     <main className="min-h-screen px-6 pb-24 pt-32">
       <div className="mx-auto max-w-5xl">
 
-        {/* =====================================================
+        {/* ====================================================
             HEADER
-        ===================================================== */}
+        ==================================================== */}
 
         <div className="mb-12 text-center">
 
@@ -187,175 +738,27 @@ export default function ContactPage() {
 
         </div>
 
-        {/* =====================================================
-            CONTACT FORM
-        ===================================================== */}
+        {/* ====================================================
+            SUCCESS / FORM
+        ==================================================== */}
 
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-5 rounded-2xl border border-white/10 bg-white/[0.025] p-6 md:p-8"
-        >
+        {submitted ? (
 
-          {/* Name + Email */}
+          /* ==================================================
+             SUCCESS MESSAGE
+          ================================================== */
 
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="rounded-2xl border border-green-500/20 bg-green-500/[0.05] p-8 text-center md:p-12">
 
-            {/* Name */}
+            {/* Success Icon */}
 
-            <div>
-              <label
-                htmlFor="name"
-                className="mb-2 block text-sm font-medium text-gray-300"
-              >
-                Name
-              </label>
-
-              <input
-                id="name"
-                required
-                type="text"
-                placeholder="Your Name"
-                value={form.name}
-                onChange={(event) =>
-                  setForm({
-                    ...form,
-                    name: event.target.value,
-                  })
-                }
-                className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
-              />
-            </div>
-
-            {/* Email */}
-
-            <div>
-              <label
-                htmlFor="email"
-                className="mb-2 block text-sm font-medium text-gray-300"
-              >
-                Email
-              </label>
-
-              <input
-                id="email"
-                required
-                type="email"
-                placeholder="Your Email"
-                value={form.email}
-                onChange={(event) =>
-                  setForm({
-                    ...form,
-                    email: event.target.value,
-                  })
-                }
-                className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
-              />
-            </div>
-
-          </div>
-
-          {/* Mobile + Subject */}
-
-          <div className="grid gap-5 md:grid-cols-2">
-
-            {/* Mobile */}
-
-            <div>
-              <label
-                htmlFor="mobileNumber"
-                className="mb-2 block text-sm font-medium text-gray-300"
-              >
-                Mobile Number
-                <span className="ml-1 text-xs text-gray-500">
-                  (Optional)
-                </span>
-              </label>
-
-              <input
-                id="mobileNumber"
-                type="tel"
-                placeholder="Your Mobile Number"
-                value={form.mobileNumber}
-                onChange={(event) =>
-                  setForm({
-                    ...form,
-                    mobileNumber: event.target.value,
-                  })
-                }
-                pattern="[0-9+\-\s()]{10,15}"
-                title="Please enter a valid mobile number"
-                className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
-              />
-            </div>
-
-            {/* Subject */}
-
-            <div>
-              <label
-                htmlFor="subject"
-                className="mb-2 block text-sm font-medium text-gray-300"
-              >
-                Subject
-              </label>
-
-              <input
-                id="subject"
-                required
-                type="text"
-                placeholder="Subject"
-                value={form.subject}
-                onChange={(event) =>
-                  setForm({
-                    ...form,
-                    subject: event.target.value,
-                  })
-                }
-                className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
-              />
-            </div>
-
-          </div>
-
-          {/* Message */}
-
-          <div>
-            <label
-              htmlFor="message"
-              className="mb-2 block text-sm font-medium text-gray-300"
-            >
-              Message
-            </label>
-
-            <textarea
-              id="message"
-              required
-              rows={7}
-              placeholder="Your Message"
-              value={form.message}
-              onChange={(event) =>
-                setForm({
-                  ...form,
-                  message: event.target.value,
-                })
-              }
-              className="w-full resize-none rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
-            />
-          </div>
-
-          {/* =====================================================
-              SUCCESS MESSAGE
-          ===================================================== */}
-
-          {submitted && (
-            <div className="flex items-start gap-3 rounded-lg border border-green-500/20 bg-green-500/10 p-4 text-sm text-green-400">
-
-              {/* Check Icon */}
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10 text-green-400">
 
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="mt-0.5 h-5 w-5 shrink-0"
+                className="h-8 w-8"
               >
                 <circle
                   cx="12"
@@ -374,120 +777,450 @@ export default function ContactPage() {
                 />
               </svg>
 
-              <div>
-                <p className="font-medium text-green-300">
-                  Message submitted successfully!
-                </p>
-
-                <p className="mt-1 text-green-400/80">
-                  Thank you for reaching out. I&apos;ll get in touch
-                  with you soon.
-                </p>
-              </div>
-
             </div>
-          )}
 
-          {/* =====================================================
-              ERROR MESSAGE
-          ===================================================== */}
+            {/* Success Heading */}
 
-          {error && (
-            <div className="flex items-start gap-3 rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-400">
+            <h2 className="mt-6 text-2xl font-semibold text-green-300">
+              Message submitted successfully!
+            </h2>
 
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="mt-0.5 h-5 w-5 shrink-0"
-              >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="9"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                />
+            {/* Success Description */}
 
-                <path
-                  d="M12 8V13"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                />
+            <p className="mx-auto mt-3 max-w-xl leading-7 text-gray-400">
+              Thank you for reaching out.
+              I&apos;ll get in touch with you soon.
+            </p>
 
-                <circle
-                  cx="12"
-                  cy="16.5"
-                  r="1"
-                  fill="currentColor"
-                />
-              </svg>
+            {/* Send Another Message */}
 
-              <div>
-                <p className="font-medium text-red-300">
-                  Unable to send your message
-                </p>
+            <button
+              type="button"
+              onClick={() => {
+                setSubmitted(false);
+                setError("");
+                setFieldErrors({});
+              }}
+              className="mt-7 rounded-lg border border-white/10 bg-white/[0.04] px-6 py-3 font-medium text-white transition hover:border-blue-500/40 hover:bg-white/[0.08]"
+            >
+              Send Another Message
+            </button>
 
-                <p className="mt-1 text-red-400/80">
-                  {error}
-                </p>
-              </div>
+          </div>
 
-            </div>
-          )}
+        ) : (
 
-          {/* =====================================================
-              SUBMIT BUTTON
-          ===================================================== */}
+          /* ==================================================
+             CONTACT FORM
+          ================================================== */
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3 font-medium text-white shadow-lg shadow-blue-500/10 transition hover:from-blue-500 hover:to-violet-500 disabled:cursor-not-allowed disabled:opacity-60"
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-5 rounded-2xl border border-white/10 bg-white/[0.025] p-6 md:p-8"
           >
 
-            {loading ? (
-              <>
-                {/* Loading Spinner */}
+            {/* =================================================
+                NAME + EMAIL
+            ================================================= */}
+
+            <div className="grid gap-5 md:grid-cols-2">
+
+              {/* Name */}
+
+              <div>
+
+                <label
+                  htmlFor="name"
+                  className="mb-2 block text-sm font-medium text-gray-300"
+                >
+                  Name
+                </label>
+
+                <input
+                  id="name"
+                  required
+                  type="text"
+                  placeholder="Your Name"
+                  value={form.name}
+                  onChange={(event) => {
+                    setForm((previous) => ({
+                      ...previous,
+                      name: event.target.value,
+                    }));
+
+                    setError("");
+                  }}
+                  className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
+                />
+
+              </div>
+
+              {/* Email */}
+
+              <div>
+
+                <label
+                  htmlFor="email"
+                  className="mb-2 block text-sm font-medium text-gray-300"
+                >
+                  Email
+                </label>
+
+                <input
+                  id="email"
+                  required
+                  type="email"
+                  placeholder="Your Email"
+                  value={form.email}
+                  onChange={(event) =>
+                    handleEmailChange(
+                      event.target.value
+                    )
+                  }
+                  onBlur={() => {
+                    if (
+                      form.email &&
+                      !validateEmail(
+                        form.email
+                      )
+                    ) {
+                      setFieldErrors(
+                        (previous) => ({
+                          ...previous,
+                          email:
+                            "Please enter a valid email address.",
+                        })
+                      );
+                    }
+                  }}
+                  className={`w-full rounded-lg border bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500 ${fieldErrors.email
+                    ? "border-red-500/60"
+                    : "border-white/10"
+                    }`}
+                />
+
+                {fieldErrors.email && (
+                  <p className="mt-2 text-sm text-red-400">
+                    {fieldErrors.email}
+                  </p>
+                )}
+
+              </div>
+
+            </div>
+
+            {/* =================================================
+                MOBILE + SUBJECT
+            ================================================= */}
+
+            <div className="grid gap-5 md:grid-cols-2">
+
+              {/* Mobile */}
+
+              <div>
+
+                <label
+                  htmlFor="mobileNumber"
+                  className="mb-2 block text-sm font-medium text-gray-300"
+                >
+                  Mobile Number
+
+                  <span className="ml-1 text-xs text-gray-500">
+                    (Optional)
+                  </span>
+                </label>
+
+                <div className="flex">
+
+                  {/* Country Code */}
+
+                  <div className="relative shrink-0">
+
+                    <select
+                      value={selectedCountry}
+                      onChange={(event) =>
+                        handleCountryChange(
+                          event.target.value
+                        )
+                      }
+                      aria-label="Country code"
+                      className="h-full min-w-[135px] appearance-none rounded-l-lg border border-r-0 border-white/10 bg-black/40 px-3 pr-8 text-sm text-white outline-none transition focus:border-blue-500"
+                    >
+
+                      {countries.map(
+                        (country) => (
+                          <option
+                            key={
+                              country.code
+                            }
+                            value={
+                              country.code
+                            }
+                            className="bg-gray-900 text-white"
+                          >
+                            {country.flag}{" "}
+                            {country.dialCode}
+                          </option>
+                        )
+                      )}
+
+                    </select>
+
+                    {/* Dropdown Arrow */}
+
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="pointer-events-none absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+                    >
+                      <path
+                        d="M6 9L12 15L18 9"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+
+                  </div>
+
+                  {/* Mobile Number */}
+
+                  <input
+                    id="mobileNumber"
+                    type="tel"
+                    inputMode="numeric"
+                    autoComplete="tel"
+                    placeholder={
+                      selectedCountry === "IN"
+                        ? "9876543210"
+                        : "Mobile Number"
+                    }
+                    value={
+                      form.mobileNumber
+                    }
+                    onChange={(event) =>
+                      handleMobileChange(
+                        event.target.value
+                      )
+                    }
+                    maxLength={
+                      selectedCountry === "IN"
+                        ? 10
+                        : 15
+                    }
+                    className={`min-w-0 flex-1 rounded-r-lg border bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500 ${fieldErrors.mobileNumber
+                      ? "border-red-500/60"
+                      : "border-white/10"
+                      }`}
+                  />
+
+                </div>
+
+                {/* Mobile Validation */}
+
+                {fieldErrors.mobileNumber ? (
+
+                  <p className="mt-2 text-sm text-red-400">
+                    {fieldErrors.mobileNumber}
+                  </p>
+
+                ) : selectedCountry ===
+                  "IN" ? (
+
+                  <p className="mt-2 text-xs text-gray-500">
+                    Enter 10 digits starting with
+                    6, 7, 8 or 9.
+                  </p>
+
+                ) : (
+
+                  <p className="mt-2 text-xs text-gray-500">
+                    Enter 6 to 15 digits.
+                  </p>
+
+                )}
+
+              </div>
+
+              {/* Subject */}
+
+              <div>
+
+                <label
+                  htmlFor="subject"
+                  className="mb-2 block text-sm font-medium text-gray-300"
+                >
+                  Subject
+                </label>
+
+                <input
+                  id="subject"
+                  required
+                  type="text"
+                  placeholder="Subject"
+                  value={form.subject}
+                  onChange={(event) => {
+                    setForm((previous) => ({
+                      ...previous,
+                      subject:
+                        event.target.value,
+                    }));
+
+                    setError("");
+                  }}
+                  className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
+                />
+
+              </div>
+
+            </div>
+
+            {/* =================================================
+                MESSAGE
+            ================================================= */}
+
+            <div>
+
+              <label
+                htmlFor="message"
+                className="mb-2 block text-sm font-medium text-gray-300"
+              >
+                Message
+              </label>
+
+              <textarea
+                id="message"
+                required
+                rows={7}
+                placeholder="Your Message"
+                value={form.message}
+                onChange={(event) => {
+                  setForm((previous) => ({
+                    ...previous,
+                    message:
+                      event.target.value,
+                  }));
+
+                  setError("");
+                }}
+                className="w-full resize-none rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
+              />
+
+            </div>
+
+            {/* =================================================
+                API ERROR
+            ================================================= */}
+
+            {error && (
+
+              <div className="flex items-start gap-3 rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-400">
+
+                {/* Error Icon */}
 
                 <svg
-                  className="h-5 w-5 animate-spin"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="mt-0.5 h-5 w-5 shrink-0"
                 >
                   <circle
                     cx="12"
                     cy="12"
                     r="9"
                     stroke="currentColor"
-                    strokeOpacity="0.3"
-                    strokeWidth="2"
+                    strokeWidth="1.8"
                   />
 
                   <path
-                    d="M21 12a9 9 0 0 0-9-9"
+                    d="M12 8V13"
                     stroke="currentColor"
-                    strokeWidth="2"
+                    strokeWidth="1.8"
                     strokeLinecap="round"
+                  />
+
+                  <circle
+                    cx="12"
+                    cy="16.5"
+                    r="1"
+                    fill="currentColor"
                   />
                 </svg>
 
-                Sending...
+                <div>
 
-              </>
-            ) : (
-              "Send Message"
+                  <p className="font-medium text-red-300">
+                    Unable to send your message
+                  </p>
+
+                  <p className="mt-1 text-red-400/80">
+                    {error}
+                  </p>
+
+                </div>
+
+              </div>
+
             )}
 
-          </button>
+            {/* =================================================
+                SUBMIT BUTTON
+            ================================================= */}
 
-        </form>
+            <button
+              type="submit"
+              disabled={loading}
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3 font-medium text-white shadow-lg shadow-blue-500/10 transition hover:from-blue-500 hover:to-violet-500 disabled:cursor-not-allowed disabled:opacity-60"
+            >
 
-        {/* =====================================================
+              {loading ? (
+
+                <>
+                  {/* Loading Spinner */}
+
+                  <svg
+                    className="h-5 w-5 animate-spin"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="9"
+                      stroke="currentColor"
+                      strokeOpacity="0.3"
+                      strokeWidth="2"
+                    />
+
+                    <path
+                      d="M21 12a9 9 0 0 0-9-9"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+
+                  Sending...
+                </>
+
+              ) : (
+
+                "Send Message"
+
+              )}
+
+            </button>
+
+          </form>
+
+        )}
+
+        {/* ====================================================
             RESUME
-        ===================================================== */}
+        ==================================================== */}
 
         <div className="mt-12 rounded-2xl border border-white/10 bg-white/[0.025] p-8 text-center">
 
@@ -547,9 +1280,9 @@ export default function ContactPage() {
 
         </div>
 
-        {/* =====================================================
+        {/* ====================================================
             SOCIAL LINKS
-        ===================================================== */}
+        ==================================================== */}
 
         <div className="mt-16 text-center">
 
@@ -563,36 +1296,42 @@ export default function ContactPage() {
 
           <div className="mt-7 flex flex-wrap justify-center gap-4">
 
-            {socialLinks.map((social) => (
-              <a
-                key={social.name}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Visit my ${social.name}`}
-                className="group flex min-w-[190px] items-center gap-4 rounded-xl border border-white/10 bg-white/[0.025] px-5 py-4 text-left transition duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:bg-white/[0.05]"
-              >
+            {socialLinks.map(
+              (social) => (
 
-                {/* Icon */}
+                <a
+                  key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit my ${social.name}`}
+                  className="group flex min-w-[190px] items-center gap-4 rounded-xl border border-white/10 bg-white/[0.025] px-5 py-4 text-left transition duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:bg-white/[0.05]"
+                >
 
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 transition duration-300 group-hover:bg-blue-500/20 group-hover:text-blue-300">
-                  {social.icon}
-                </div>
+                  {/* Icon */}
 
-                {/* Text */}
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 transition duration-300 group-hover:bg-blue-500/20 group-hover:text-blue-300">
+                    {social.icon}
+                  </div>
 
-                <div>
-                  <p className="font-medium text-white">
-                    {social.name}
-                  </p>
+                  {/* Text */}
 
-                  <p className="mt-1 max-w-[150px] truncate text-sm text-gray-500">
-                    {social.username}
-                  </p>
-                </div>
+                  <div>
 
-              </a>
-            ))}
+                    <p className="font-medium text-white">
+                      {social.name}
+                    </p>
+
+                    <p className="mt-1 max-w-[150px] truncate text-sm text-gray-500">
+                      {social.username}
+                    </p>
+
+                  </div>
+
+                </a>
+
+              )
+            )}
 
           </div>
 
