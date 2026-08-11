@@ -26,30 +26,6 @@ export const projects = [
     featured: true
   },
 
-  {
-    id: 2,
-    title: "E-Commerce Application",
-    slug: "ecommerce",
-
-    description:
-      "Responsive e-commerce application with product listing, filtering and cart functionality.",
-
-    longDescription:
-      "An e-commerce application demonstrating reusable React components, state management, API integration, product filtering and shopping cart functionality.",
-
-    technologies: [
-      "React",
-      "JavaScript",
-      "Redux"
-    ],
-
-    image: "/projects/ecommerce.png",
-
-    githubUrl: "#",
-    liveUrl: "#",
-
-    featured: true
-  },
 
   {
     id: 3,
@@ -66,6 +42,7 @@ export const projects = [
       "React",
       "TypeScript",
       "Redux Toolkit",
+      "Spring Boot",
       "REST API"
     ],
 

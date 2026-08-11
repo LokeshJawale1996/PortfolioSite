@@ -100,222 +100,147 @@ const socialLinks = [
 ============================================================ */
 
 const countries = [
-  {
-    code: "IN",
-    name: "India",
-    dialCode: "+91",
-    flag: "🇮🇳",
-  },
-  {
-    code: "US",
-    name: "United States",
-    dialCode: "+1",
-    flag: "🇺🇸",
-  },
-  {
-    code: "CA",
-    name: "Canada",
-    dialCode: "+1",
-    flag: "🇨🇦",
-  },
-  {
-    code: "GB",
-    name: "United Kingdom",
-    dialCode: "+44",
-    flag: "🇬🇧",
-  },
-  {
-    code: "AU",
-    name: "Australia",
-    dialCode: "+61",
-    flag: "🇦🇺",
-  },
-  {
-    code: "DE",
-    name: "Germany",
-    dialCode: "+49",
-    flag: "🇩🇪",
-  },
-  {
-    code: "FR",
-    name: "France",
-    dialCode: "+33",
-    flag: "🇫🇷",
-  },
-  {
-    code: "IT",
-    name: "Italy",
-    dialCode: "+39",
-    flag: "🇮🇹",
-  },
-  {
-    code: "ES",
-    name: "Spain",
-    dialCode: "+34",
-    flag: "🇪🇸",
-  },
-  {
-    code: "NL",
-    name: "Netherlands",
-    dialCode: "+31",
-    flag: "🇳🇱",
-  },
-  {
-    code: "CH",
-    name: "Switzerland",
-    dialCode: "+41",
-    flag: "🇨🇭",
-  },
-  {
-    code: "SG",
-    name: "Singapore",
-    dialCode: "+65",
-    flag: "🇸🇬",
-  },
-  {
-    code: "AE",
-    name: "United Arab Emirates",
-    dialCode: "+971",
-    flag: "🇦🇪",
-  },
-  {
-    code: "SA",
-    name: "Saudi Arabia",
-    dialCode: "+966",
-    flag: "🇸🇦",
-  },
-  {
-    code: "QA",
-    name: "Qatar",
-    dialCode: "+974",
-    flag: "🇶🇦",
-  },
-  {
-    code: "NZ",
-    name: "New Zealand",
-    dialCode: "+64",
-    flag: "🇳🇿",
-  },
-  {
-    code: "JP",
-    name: "Japan",
-    dialCode: "+81",
-    flag: "🇯🇵",
-  },
-  {
-    code: "CN",
-    name: "China",
-    dialCode: "+86",
-    flag: "🇨🇳",
-  },
-  {
-    code: "BR",
-    name: "Brazil",
-    dialCode: "+55",
-    flag: "🇧🇷",
-  },
-  {
-    code: "ZA",
-    name: "South Africa",
-    dialCode: "+27",
-    flag: "🇿🇦",
-  },
-  {
-    code: "RU",
-    name: "Russia",
-    dialCode: "+7",
-    flag: "🇷🇺",
-  },
-  {
-    code: "MY",
-    name: "Malaysia",
-    dialCode: "+60",
-    flag: "🇲🇾",
-  },
-  {
-    code: "TH",
-    name: "Thailand",
-    dialCode: "+66",
-    flag: "🇹🇭",
-  },
-  {
-    code: "ID",
-    name: "Indonesia",
-    dialCode: "+62",
-    flag: "🇮🇩",
-  },
-  {
-    code: "IE",
-    name: "Ireland",
-    dialCode: "+353",
-    flag: "🇮🇪",
-  },
+  { code: "IN", name: "India", dialCode: "+91", flag: "🇮🇳" },
+  { code: "US", name: "United States", dialCode: "+1", flag: "🇺🇸" },
+  { code: "CA", name: "Canada", dialCode: "+1", flag: "🇨🇦" },
+  { code: "GB", name: "United Kingdom", dialCode: "+44", flag: "🇬🇧" },
+  { code: "AU", name: "Australia", dialCode: "+61", flag: "🇦🇺" },
+  { code: "DE", name: "Germany", dialCode: "+49", flag: "🇩🇪" },
+  { code: "FR", name: "France", dialCode: "+33", flag: "🇫🇷" },
+  { code: "IT", name: "Italy", dialCode: "+39", flag: "🇮🇹" },
+  { code: "ES", name: "Spain", dialCode: "+34", flag: "🇪🇸" },
+  { code: "NL", name: "Netherlands", dialCode: "+31", flag: "🇳🇱" },
+  { code: "CH", name: "Switzerland", dialCode: "+41", flag: "🇨🇭" },
+  { code: "SG", name: "Singapore", dialCode: "+65", flag: "🇸🇬" },
+  { code: "AE", name: "United Arab Emirates", dialCode: "+971", flag: "🇦🇪" },
+  { code: "SA", name: "Saudi Arabia", dialCode: "+966", flag: "🇸🇦" },
+  { code: "QA", name: "Qatar", dialCode: "+974", flag: "🇶🇦" },
+  { code: "NZ", name: "New Zealand", dialCode: "+64", flag: "🇳🇿" },
+  { code: "JP", name: "Japan", dialCode: "+81", flag: "🇯🇵" },
+  { code: "CN", name: "China", dialCode: "+86", flag: "🇨🇳" },
+  { code: "BR", name: "Brazil", dialCode: "+55", flag: "🇧🇷" },
+  { code: "ZA", name: "South Africa", dialCode: "+27", flag: "🇿🇦" },
+  { code: "RU", name: "Russia", dialCode: "+7", flag: "🇷🇺" },
+  { code: "MY", name: "Malaysia", dialCode: "+60", flag: "🇲🇾" },
+  { code: "TH", name: "Thailand", dialCode: "+66", flag: "🇹🇭" },
+  { code: "ID", name: "Indonesia", dialCode: "+62", flag: "🇮🇩" },
+  { code: "IE", name: "Ireland", dialCode: "+353", flag: "🇮🇪" },
 ];
 
 /* ============================================================
    VALIDATION
 ============================================================ */
 
-/**
- * Validate email address.
- */
 const validateEmail = (email: string): boolean => {
   const value = email.trim();
 
-  if (!value) {
+  if (!value || value.includes("..") || /\s/.test(value)) {
     return false;
   }
 
   const emailRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
-  if (!emailRegex.test(value)) {
-    return false;
-  }
-
-  if (value.includes("..")) {
-    return false;
-  }
-
-  if (/\s/.test(value)) {
-    return false;
-  }
-
-  return true;
+  return emailRegex.test(value);
 };
 
-/**
- * Validate Indian mobile number.
- *
- * Exactly 10 digits.
- * First digit must be 6, 7, 8 or 9.
- */
-const validateIndianMobile = (
-  mobile: string
-): boolean => {
+const validateIndianMobile = (mobile: string): boolean => {
   return /^[6-9][0-9]{9}$/.test(mobile);
 };
 
-/**
- * Generic international mobile validation.
- *
- * Used for countries other than India.
- */
-const validateInternationalMobile = (
-  mobile: string
-): boolean => {
+const validateInternationalMobile = (mobile: string): boolean => {
   return /^[0-9]{6,15}$/.test(mobile);
 };
+
+/* ============================================================
+   SMALL ICONS
+============================================================ */
+
+function SendIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-5 w-5"
+    >
+      <path
+        d="M21 3L10.5 13.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      <path
+        d="M21 3L14.3 21L10.5 13.5L3 9.7L21 3Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-8 w-8"
+    >
+      <circle
+        cx="12"
+        cy="12"
+        r="9"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+
+      <path
+        d="M8 12L10.8 15L16.5 9"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ArrowIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-4 w-4"
+    >
+      <path
+        d="M5 12H19"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+
+      <path
+        d="M13 6L19 12L13 18"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 /* ============================================================
    COMPONENT
 ============================================================ */
 
 export default function ContactPage() {
-  /* ==========================================================
-     FORM STATE
-  ========================================================== */
-
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -324,45 +249,27 @@ export default function ContactPage() {
     message: "",
   });
 
-  /* ==========================================================
-     COUNTRY STATE
-  ========================================================== */
-
-  const [selectedCountry, setSelectedCountry] =
-    useState("IN");
+  const [selectedCountry, setSelectedCountry] = useState("IN");
 
   const selectedCountryData =
     countries.find(
-      (country) =>
-        country.code === selectedCountry
+      (country) => country.code === selectedCountry
     ) || countries[0];
 
-  /* ==========================================================
-     UI STATE
-  ========================================================== */
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const [submitted, setSubmitted] =
-    useState(false);
-
-  const [loading, setLoading] =
-    useState(false);
-
-  const [error, setError] =
-    useState("");
-
-  const [fieldErrors, setFieldErrors] =
-    useState<{
-      email?: string;
-      mobileNumber?: string;
-    }>({});
+  const [fieldErrors, setFieldErrors] = useState<{
+    email?: string;
+    mobileNumber?: string;
+  }>({});
 
   /* ==========================================================
-     EMAIL CHANGE
+     EMAIL
   ========================================================== */
 
-  const handleEmailChange = (
-    value: string
-  ) => {
+  const handleEmailChange = (value: string) => {
     setForm((previous) => ({
       ...previous,
       email: value,
@@ -371,14 +278,10 @@ export default function ContactPage() {
     setSubmitted(false);
     setError("");
 
-    if (
-      value.trim() &&
-      !validateEmail(value)
-    ) {
+    if (value.trim() && !validateEmail(value)) {
       setFieldErrors((previous) => ({
         ...previous,
-        email:
-          "Please enter a valid email address.",
+        email: "Please enter a valid email address.",
       }));
     } else {
       setFieldErrors((previous) => ({
@@ -389,18 +292,12 @@ export default function ContactPage() {
   };
 
   /* ==========================================================
-     COUNTRY CHANGE
+     COUNTRY
   ========================================================== */
 
-  const handleCountryChange = (
-    countryCode: string
-  ) => {
+  const handleCountryChange = (countryCode: string) => {
     setSelectedCountry(countryCode);
 
-    /*
-     * Clear mobile when changing country
-     * because validation rules may change.
-     */
     setForm((previous) => ({
       ...previous,
       mobileNumber: "",
@@ -416,31 +313,19 @@ export default function ContactPage() {
   };
 
   /* ==========================================================
-     MOBILE CHANGE
+     MOBILE
   ========================================================== */
 
-  const handleMobileChange = (
-    value: string
-  ) => {
-    /*
-     * Only allow digits.
-     */
-    const onlyDigits = value.replace(
-      /\D/g,
-      ""
-    );
+  const handleMobileChange = (value: string) => {
+    const onlyDigits = value.replace(/\D/g, "");
 
-    /*
-     * India = exactly 10 digits.
-     * Other countries = maximum 15 digits.
-     */
     const maxLength =
-      selectedCountry === "IN"
-        ? 10
-        : 15;
+      selectedCountry === "IN" ? 10 : 15;
 
-    const limitedValue =
-      onlyDigits.slice(0, maxLength);
+    const limitedValue = onlyDigits.slice(
+      0,
+      maxLength
+    );
 
     setForm((previous) => ({
       ...previous,
@@ -450,9 +335,6 @@ export default function ContactPage() {
     setSubmitted(false);
     setError("");
 
-    /*
-     * Mobile is optional.
-     */
     if (!limitedValue) {
       setFieldErrors((previous) => ({
         ...previous,
@@ -462,14 +344,8 @@ export default function ContactPage() {
       return;
     }
 
-    /* India */
-
     if (selectedCountry === "IN") {
-      if (
-        !validateIndianMobile(
-          limitedValue
-        )
-      ) {
+      if (!validateIndianMobile(limitedValue)) {
         setFieldErrors((previous) => ({
           ...previous,
           mobileNumber:
@@ -485,13 +361,7 @@ export default function ContactPage() {
       return;
     }
 
-    /* Other countries */
-
-    if (
-      !validateInternationalMobile(
-        limitedValue
-      )
-    ) {
+    if (!validateInternationalMobile(limitedValue)) {
       setFieldErrors((previous) => ({
         ...previous,
         mobileNumber:
@@ -506,7 +376,7 @@ export default function ContactPage() {
   };
 
   /* ==========================================================
-     SUBMIT FORM
+     SUBMIT
   ========================================================== */
 
   const handleSubmit = async (
@@ -517,37 +387,18 @@ export default function ContactPage() {
     setSubmitted(false);
     setError("");
 
-    /* ========================================================
-       EMAIL VALIDATION
-    ======================================================== */
-
     if (!validateEmail(form.email)) {
       setFieldErrors((previous) => ({
         ...previous,
-        email:
-          "Please enter a valid email address.",
+        email: "Please enter a valid email address.",
       }));
 
       return;
     }
 
-    /* ========================================================
-       MOBILE VALIDATION
-    ======================================================== */
-
-    /*
-     * Mobile is optional.
-     *
-     * Only validate if the user entered a number.
-     */
-
     if (form.mobileNumber) {
       if (selectedCountry === "IN") {
-        if (
-          !validateIndianMobile(
-            form.mobileNumber
-          )
-        ) {
+        if (!validateIndianMobile(form.mobileNumber)) {
           setFieldErrors((previous) => ({
             ...previous,
             mobileNumber:
@@ -556,26 +407,20 @@ export default function ContactPage() {
 
           return;
         }
-      } else {
-        if (
-          !validateInternationalMobile(
-            form.mobileNumber
-          )
-        ) {
-          setFieldErrors((previous) => ({
-            ...previous,
-            mobileNumber:
-              "Please enter a valid mobile number.",
-          }));
+      } else if (
+        !validateInternationalMobile(
+          form.mobileNumber
+        )
+      ) {
+        setFieldErrors((previous) => ({
+          ...previous,
+          mobileNumber:
+            "Please enter a valid mobile number.",
+        }));
 
-          return;
-        }
+        return;
       }
     }
-
-    /* ========================================================
-       START API REQUEST
-    ======================================================== */
 
     setLoading(true);
 
@@ -584,12 +429,6 @@ export default function ContactPage() {
         process.env.NEXT_PUBLIC_API_URL ||
         "http://localhost:8080";
 
-      /*
-       * mobileNumber is optional.
-       *
-       * Therefore we first create the request
-       * without mobileNumber.
-       */
       const requestBody: {
         name: string;
         email: string;
@@ -603,39 +442,19 @@ export default function ContactPage() {
         message: form.message.trim(),
       };
 
-      /*
-       * Only add mobileNumber when the user
-       * actually entered one.
-       *
-       * Example:
-       *
-       * Country = India
-       * Number  = 9876543210
-       *
-       * Result:
-       * +919876543210
-       */
       if (form.mobileNumber) {
         requestBody.mobileNumber =
           `${selectedCountryData.dialCode}${form.mobileNumber}`;
       }
 
-      /* ======================================================
-         API CALL
-      ====================================================== */
-
       const response = await fetch(
         `${apiUrl}/api/v1/contact`,
         {
           method: "POST",
-
           headers: {
             "Content-Type": "application/json",
           },
-
-          body: JSON.stringify(
-            requestBody
-          ),
+          body: JSON.stringify(requestBody),
         }
       );
 
@@ -647,10 +466,6 @@ export default function ContactPage() {
         data = null;
       }
 
-      /* ======================================================
-         API ERROR
-      ====================================================== */
-
       if (!response.ok) {
         throw new Error(
           data?.message ||
@@ -658,29 +473,10 @@ export default function ContactPage() {
         );
       }
 
-      /* ======================================================
-         SUCCESS
-      ====================================================== */
-
-      /*
-       * This changes the UI from:
-       *
-       * CONTACT FORM
-       *
-       * to:
-       *
-       * SUCCESS MESSAGE
-       */
       setSubmitted(true);
-
       setError("");
-
       setFieldErrors({});
 
-      /*
-       * Clear the form so when the user clicks
-       * "Send Another Message", they get a fresh form.
-       */
       setForm({
         name: "",
         email: "",
@@ -689,9 +485,6 @@ export default function ContactPage() {
         message: "",
       });
 
-      /*
-       * Reset country to India.
-       */
       setSelectedCountry("IN");
     } catch (error) {
       console.error(
@@ -714,633 +507,1039 @@ export default function ContactPage() {
   ========================================================== */
 
   return (
-    <main className="min-h-screen px-6 pb-24 pt-32">
-      <div className="mx-auto max-w-5xl">
+    <main
+      className="
+        relative
+        min-h-screen
+        overflow-hidden
+        px-6
+        pb-24
+        pt-32
+      "
+    >
+      {/* ======================================================
+          BACKGROUND
+      ====================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -left-40
+          top-20
+          -z-10
+          h-96
+          w-96
+          rounded-full
+          bg-blue-600/[0.08]
+          blur-[120px]
+        "
+      />
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -right-40
+          top-[35%]
+          -z-10
+          h-96
+          w-96
+          rounded-full
+          bg-violet-600/[0.07]
+          blur-[120px]
+        "
+      />
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          -z-20
+          opacity-[0.025]
+          [background-image:linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)]
+          [background-size:64px_64px]
+        "
+      />
+
+      <div className="mx-auto max-w-6xl">
 
         {/* ====================================================
-            HEADER
+            HERO
         ==================================================== */}
 
-        <div className="mb-12 text-center">
+        <div className="mx-auto max-w-4xl text-center">
 
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">
-            Contact
-          </p>
+          <div className="mb-5 flex items-center justify-center gap-3">
 
-          <h1 className="mt-3 text-5xl font-bold text-white md:text-6xl">
-            Let&apos;s work together.
+            <span className="h-px w-8 bg-blue-500" />
+
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-400">
+              Contact
+            </p>
+
+            <span className="h-px w-8 bg-blue-500" />
+
+          </div>
+
+          <h1
+            className="
+              text-5xl
+              font-bold
+              leading-[1.05]
+              tracking-tight
+              text-white
+              sm:text-6xl
+              md:text-7xl
+            "
+          >
+            Let&apos;s build something
+
+            <span
+              className="
+                block
+                bg-gradient-to-r
+                from-blue-400
+                via-blue-500
+                to-violet-500
+                bg-clip-text
+                text-transparent
+              "
+            >
+              great together.
+            </span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-2xl leading-7 text-gray-400">
-            Have a project, opportunity or just want to say hello?
-            Feel free to send me a message.
+          <p
+            className="
+              mx-auto
+              mt-6
+              max-w-2xl
+              text-base
+              leading-8
+              text-gray-500
+              sm:text-lg
+            "
+          >
+            Have a project, opportunity, idea or simply
+            want to say hello? Drop me a message and
+            I&apos;ll get back to you.
           </p>
 
         </div>
 
         {/* ====================================================
-            SUCCESS / FORM
+            CONTACT LAYOUT
         ==================================================== */}
 
-        {submitted ? (
+        <div
+          className="
+            mt-14
+            grid
+            gap-6
+            lg:grid-cols-[0.75fr_1.25fr]
+            lg:items-start
+          "
+        >
 
-          /* ==================================================
-             SUCCESS MESSAGE
-          ================================================== */
+          {/* ==================================================
+              LEFT INFO
+          ================================================== */}
 
-          <div className="rounded-2xl border border-green-500/20 bg-green-500/[0.05] p-8 text-center md:p-12">
+          <div className="space-y-5">
 
-            {/* Success Icon */}
+            {/* Intro Card */}
 
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10 text-green-400">
+            <div
+              className="
+                relative
+                overflow-hidden
+                rounded-3xl
+                border
+                border-white/[0.08]
+                bg-white/[0.025]
+                p-7
+              "
+            >
 
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8"
-              >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="9"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                />
+              <div
+                className="
+                  absolute
+                  -right-16
+                  -top-16
+                  h-32
+                  w-32
+                  rounded-full
+                  bg-blue-500/[0.08]
+                  blur-3xl
+                "
+              />
 
-                <path
-                  d="M8 12L10.8 15L16.5 9"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <div className="relative">
+
+                <div
+                  className="
+                    flex
+                    h-12
+                    w-12
+                    items-center
+                    justify-center
+                    rounded-xl
+                    border
+                    border-blue-500/20
+                    bg-blue-500/[0.07]
+                    text-blue-400
+                  "
+                >
+                  <SendIcon />
+                </div>
+
+                <h2 className="mt-6 text-xl font-semibold text-white">
+                  Get in touch
+                </h2>
+
+                <p className="mt-3 text-sm leading-7 text-gray-500">
+                  I&apos;m always open to discussing new
+                  projects, creative ideas or opportunities
+                  to be part of something interesting.
+                </p>
+
+                <div className="mt-6 flex items-center gap-2 text-xs text-gray-500">
+
+                  <span className="h-2 w-2 rounded-full bg-green-400 shadow-lg shadow-green-400/40" />
+
+                  Usually responds within 24–48 hours
+
+                </div>
+
+              </div>
 
             </div>
 
-            {/* Success Heading */}
+            {/* Quick Contact */}
 
-            <h2 className="mt-6 text-2xl font-semibold text-green-300">
-              Message submitted successfully!
-            </h2>
-
-            {/* Success Description */}
-
-            <p className="mx-auto mt-3 max-w-xl leading-7 text-gray-400">
-              Thank you for reaching out.
-              I&apos;ll get in touch with you soon.
-            </p>
-
-            {/* Send Another Message */}
-
-            <button
-              type="button"
-              onClick={() => {
-                setSubmitted(false);
-                setError("");
-                setFieldErrors({});
-              }}
-              className="mt-7 rounded-lg border border-white/10 bg-white/[0.04] px-6 py-3 font-medium text-white transition hover:border-blue-500/40 hover:bg-white/[0.08]"
+            <div
+              className="
+                rounded-3xl
+                border
+                border-white/[0.08]
+                bg-white/[0.025]
+                p-7
+              "
             >
-              Send Another Message
-            </button>
+
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-600">
+                Connect
+              </p>
+
+              <div className="mt-5 space-y-3">
+
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target={
+                      social.name === "Email"
+                        ? undefined
+                        : "_blank"
+                    }
+                    rel={
+                      social.name === "Email"
+                        ? undefined
+                        : "noopener noreferrer"
+                    }
+                    className="
+                      group
+                      flex
+                      items-center
+                      gap-4
+                      rounded-2xl
+                      border
+                      border-white/[0.06]
+                      bg-white/[0.02]
+                      p-4
+                      transition
+                      duration-300
+                      hover:-translate-y-0.5
+                      hover:border-blue-500/20
+                      hover:bg-blue-500/[0.04]
+                    "
+                  >
+
+                    <div
+                      className="
+                        flex
+                        h-11
+                        w-11
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-xl
+                        bg-blue-500/[0.07]
+                        text-blue-400
+                        transition
+                        group-hover:bg-blue-500/[0.12]
+                      "
+                    >
+                      {social.icon}
+                    </div>
+
+                    <div className="min-w-0">
+
+                      <p className="text-sm font-medium text-white">
+                        {social.name}
+                      </p>
+
+                      <p className="mt-1 truncate text-xs text-gray-600">
+                        {social.username}
+                      </p>
+
+                    </div>
+
+                    <div className="ml-auto text-gray-600 transition group-hover:translate-x-1 group-hover:text-blue-400">
+                      <ArrowIcon />
+                    </div>
+
+                  </a>
+                ))}
+
+              </div>
+
+            </div>
 
           </div>
 
-        ) : (
+          {/* ==================================================
+              FORM
+          ================================================== */}
 
-          /* ==================================================
-             CONTACT FORM
-          ================================================== */
+          <div>
 
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-5 rounded-2xl border border-white/10 bg-white/[0.025] p-6 md:p-8"
-          >
+            {submitted ? (
 
-            {/* =================================================
-                NAME + EMAIL
-            ================================================= */}
+              /* =================================================
+                 SUCCESS
+              ================================================= */
 
-            <div className="grid gap-5 md:grid-cols-2">
+              <div
+                className="
+                  relative
+                  overflow-hidden
+                  rounded-3xl
+                  border
+                  border-green-500/20
+                  bg-green-500/[0.035]
+                  p-8
+                  text-center
+                  sm:p-12
+                "
+              >
 
-              {/* Name */}
-
-              <div>
-
-                <label
-                  htmlFor="name"
-                  className="mb-2 block text-sm font-medium text-gray-300"
-                >
-                  Name
-                </label>
-
-                <input
-                  id="name"
-                  required
-                  type="text"
-                  placeholder="Your Name"
-                  value={form.name}
-                  onChange={(event) => {
-                    setForm((previous) => ({
-                      ...previous,
-                      name: event.target.value,
-                    }));
-
-                    setError("");
-                  }}
-                  className="w-full rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
+                <div
+                  className="
+                    absolute
+                    left-1/2
+                    top-0
+                    h-48
+                    w-48
+                    -translate-x-1/2
+                    rounded-full
+                    bg-green-500/[0.08]
+                    blur-3xl
+                  "
                 />
 
-              </div>
+                <div className="relative">
 
-              {/* Email */}
+                  <div
+                    className="
+                      mx-auto
+                      flex
+                      h-20
+                      w-20
+                      items-center
+                      justify-center
+                      rounded-full
+                      border
+                      border-green-500/20
+                      bg-green-500/10
+                      text-green-400
+                    "
+                  >
+                    <CheckIcon />
+                  </div>
 
-              <div>
-
-                <label
-                  htmlFor="email"
-                  className="mb-2 block text-sm font-medium text-gray-300"
-                >
-                  Email
-                </label>
-
-                <input
-                  id="email"
-                  required
-                  type="email"
-                  placeholder="Your Email"
-                  value={form.email}
-                  onChange={(event) =>
-                    handleEmailChange(
-                      event.target.value
-                    )
-                  }
-                  onBlur={() => {
-                    if (
-                      form.email &&
-                      !validateEmail(
-                        form.email
-                      )
-                    ) {
-                      setFieldErrors(
-                        (previous) => ({
-                          ...previous,
-                          email:
-                            "Please enter a valid email address.",
-                        })
-                      );
-                    }
-                  }}
-                  className={`w-full rounded-lg border bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500 ${fieldErrors.email
-                    ? "border-red-500/60"
-                    : "border-white/10"
-                    }`}
-                />
-
-                {fieldErrors.email && (
-                  <p className="mt-2 text-sm text-red-400">
-                    {fieldErrors.email}
+                  <p className="mt-7 text-xs font-semibold uppercase tracking-[0.2em] text-green-400">
+                    Message Sent
                   </p>
-                )}
+
+                  <h2 className="mt-3 text-3xl font-bold text-white">
+                    Thanks for reaching out!
+                  </h2>
+
+                  <p className="mx-auto mt-4 max-w-lg text-sm leading-7 text-gray-500">
+                    Your message has been submitted successfully.
+                    I&apos;ll get in touch with you soon.
+                  </p>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSubmitted(false);
+                      setError("");
+                      setFieldErrors({});
+                    }}
+                    className="
+                      mt-8
+                      inline-flex
+                      items-center
+                      gap-2
+                      rounded-xl
+                      border
+                      border-white/10
+                      bg-white/[0.04]
+                      px-6
+                      py-3
+                      text-sm
+                      font-medium
+                      text-white
+                      transition
+                      hover:border-blue-500/30
+                      hover:bg-blue-500/[0.06]
+                    "
+                  >
+                    Send another message
+                    <ArrowIcon />
+                  </button>
+
+                </div>
 
               </div>
 
-            </div>
+            ) : (
 
-            {/* =================================================
-    MOBILE + SUBJECT
-================================================= */}
+              /* =================================================
+                 FORM CARD
+              ================================================= */
 
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <form
+                onSubmit={handleSubmit}
+                className="
+                  relative
+                  overflow-hidden
+                  rounded-3xl
+                  border
+                  border-white/[0.08]
+                  bg-white/[0.025]
+                  p-6
+                  sm:p-8
+                "
+              >
 
-              {/* Mobile */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    -right-20
+                    -top-20
+                    h-40
+                    w-40
+                    rounded-full
+                    bg-blue-500/[0.06]
+                    blur-3xl
+                  "
+                />
 
-              <div className="min-w-0">
+                <div className="relative">
 
-                <label
-                  htmlFor="mobileNumber"
-                  className="mb-2 block text-sm font-medium text-gray-300"
-                >
-                  Mobile Number
+                  {/* Form Header */}
 
-                  <span className="ml-1 text-xs text-gray-500">
-                    (Optional)
-                  </span>
-                </label>
+                  <div className="mb-8">
 
-                <div className="flex w-full min-w-0">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-400">
+                      Send a message
+                    </p>
 
-                  {/* Country Code */}
-
-                  <div className="relative shrink-0">
-
-                    <select
-                      value={selectedCountry}
-                      onChange={(event) =>
-                        handleCountryChange(
-                          event.target.value
-                        )
-                      }
-                      aria-label="Country code"
-                      className="
-            h-12
-            w-[100px]
-            appearance-none
-            rounded-l-lg
-            border
-            border-r-0
-            border-white/10
-            bg-black/40
-            px-2
-            pr-7
-            text-sm
-            text-white
-            outline-none
-            transition
-            focus:border-blue-500
-            sm:w-[115px]
-            sm:px-3
-            sm:pr-8
-            md:w-[120px]
-          "
-                    >
-
-                      {countries.map((country) => (
-                        <option
-                          key={country.code}
-                          value={country.code}
-                          className="bg-gray-900 text-white"
-                        >
-                          {country.flag} {country.dialCode}
-                        </option>
-                      ))}
-
-                    </select>
-
-                    {/* Dropdown Arrow */}
-
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="
-            pointer-events-none
-            absolute
-            right-2
-            top-1/2
-            h-4
-            w-4
-            -translate-y-1/2
-            text-gray-500
-          "
-                    >
-                      <path
-                        d="M6 9L12 15L18 9"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <h2 className="mt-2 text-2xl font-semibold text-white">
+                      Tell me about your idea.
+                    </h2>
 
                   </div>
 
-                  {/* Mobile Number */}
+                  {/* =================================================
+                      NAME + EMAIL
+                  ================================================= */}
 
-                  <input
-                    id="mobileNumber"
-                    type="tel"
-                    inputMode="numeric"
-                    autoComplete="tel"
-                    placeholder={
-                      selectedCountry === "IN"
-                        ? "9876543210"
-                        : "Mobile Number"
-                    }
-                    value={form.mobileNumber}
-                    onChange={(event) =>
-                      handleMobileChange(
-                        event.target.value
-                      )
-                    }
-                    maxLength={
-                      selectedCountry === "IN"
-                        ? 10
-                        : 15
-                    }
-                    className={`
-          h-12
-          min-w-0
-          w-full
-          flex-1
-          rounded-r-lg
-          border
-          bg-black/20
-          px-3
-          py-3
-          text-sm
-          text-white
-          outline-none
-          placeholder:text-gray-600
-          transition
-          focus:border-blue-500
-          sm:px-4
-          sm:text-base
-          ${fieldErrors.mobileNumber
-                        ? "border-red-500/60"
-                        : "border-white/10"
-                      }
-        `}
-                  />
+                  <div className="grid gap-5 md:grid-cols-2">
+
+                    <div>
+
+                      <label
+                        htmlFor="name"
+                        className="mb-2 block text-xs font-medium text-gray-400"
+                      >
+                        Your Name
+                      </label>
+
+                      <input
+                        id="name"
+                        required
+                        type="text"
+                        placeholder="Lokesh"
+                        value={form.name}
+                        onChange={(event) => {
+                          setForm((previous) => ({
+                            ...previous,
+                            name: event.target.value,
+                          }));
+
+                          setError("");
+                        }}
+                        className="
+                          h-12
+                          w-full
+                          rounded-xl
+                          border
+                          border-white/[0.08]
+                          bg-black/20
+                          px-4
+                          text-sm
+                          text-white
+                          outline-none
+                          placeholder:text-gray-700
+                          transition
+                          focus:border-blue-500/50
+                          focus:bg-black/30
+                        "
+                      />
+
+                    </div>
+
+                    <div>
+
+                      <label
+                        htmlFor="email"
+                        className="mb-2 block text-xs font-medium text-gray-400"
+                      >
+                        Email Address
+                      </label>
+
+                      <input
+                        id="email"
+                        required
+                        type="email"
+                        placeholder="you@example.com"
+                        value={form.email}
+                        onChange={(event) =>
+                          handleEmailChange(
+                            event.target.value
+                          )
+                        }
+                        className={`
+                          h-12
+                          w-full
+                          rounded-xl
+                          border
+                          bg-black/20
+                          px-4
+                          text-sm
+                          text-white
+                          outline-none
+                          placeholder:text-gray-700
+                          transition
+                          focus:border-blue-500/50
+                          ${fieldErrors.email
+                            ? "border-red-500/50"
+                            : "border-white/[0.08]"
+                          }
+                        `}
+                      />
+
+                      {fieldErrors.email && (
+                        <p className="mt-2 text-xs text-red-400">
+                          {fieldErrors.email}
+                        </p>
+                      )}
+
+                    </div>
+
+                  </div>
+
+                  {/* =================================================
+                      MOBILE + SUBJECT
+                  ================================================= */}
+
+                  <div className="mt-5 grid gap-5 md:grid-cols-2">
+
+                    {/* Mobile */}
+
+                    <div className="min-w-0">
+
+                      <label
+                        htmlFor="mobileNumber"
+                        className="mb-2 block text-xs font-medium text-gray-400"
+                      >
+                        Mobile Number
+                        <span className="ml-1 text-gray-600">
+                          (Optional)
+                        </span>
+                      </label>
+
+                      <div className="flex min-w-0">
+
+                        <div className="relative shrink-0">
+
+                          <select
+                            value={selectedCountry}
+                            onChange={(event) =>
+                              handleCountryChange(
+                                event.target.value
+                              )
+                            }
+                            aria-label="Country code"
+                            className="
+                              h-12
+                              w-[96px]
+                              appearance-none
+                              rounded-l-xl
+                              border
+                              border-r-0
+                              border-white/[0.08]
+                              bg-black/30
+                              px-2
+                              pr-6
+                              text-sm
+                              text-white
+                              outline-none
+                              transition
+                              focus:border-blue-500/50
+                              sm:w-[110px]
+                              sm:px-3
+                            "
+                          >
+                            {countries.map(
+                              (country) => (
+                                <option
+                                  key={country.code}
+                                  value={country.code}
+                                  className="bg-gray-900 text-white"
+                                >
+                                  {country.flag}{" "}
+                                  {country.dialCode}
+                                </option>
+                              )
+                            )}
+                          </select>
+
+                          <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="
+                              pointer-events-none
+                              absolute
+                              right-2
+                              top-1/2
+                              h-4
+                              w-4
+                              -translate-y-1/2
+                              text-gray-600
+                            "
+                          >
+                            <path
+                              d="M6 9L12 15L18 9"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+
+                        </div>
+
+                        <input
+                          id="mobileNumber"
+                          type="tel"
+                          inputMode="numeric"
+                          autoComplete="tel"
+                          placeholder={
+                            selectedCountry === "IN"
+                              ? "9876543210"
+                              : "Mobile number"
+                          }
+                          value={form.mobileNumber}
+                          onChange={(event) =>
+                            handleMobileChange(
+                              event.target.value
+                            )
+                          }
+                          maxLength={
+                            selectedCountry === "IN"
+                              ? 10
+                              : 15
+                          }
+                          className={`
+                            h-12
+                            min-w-0
+                            w-full
+                            rounded-r-xl
+                            border
+                            bg-black/20
+                            px-3
+                            text-sm
+                            text-white
+                            outline-none
+                            placeholder:text-gray-700
+                            transition
+                            focus:border-blue-500/50
+                            sm:px-4
+                            ${fieldErrors.mobileNumber
+                              ? "border-red-500/50"
+                              : "border-white/[0.08]"
+                            }
+                          `}
+                        />
+
+                      </div>
+
+                      {fieldErrors.mobileNumber ? (
+                        <p className="mt-2 text-xs leading-5 text-red-400">
+                          {fieldErrors.mobileNumber}
+                        </p>
+                      ) : (
+                        <p className="mt-2 text-[11px] text-gray-700">
+                          {selectedCountry === "IN"
+                            ? "10 digits starting with 6, 7, 8 or 9"
+                            : "6 to 15 digits"}
+                        </p>
+                      )}
+
+                    </div>
+
+                    {/* Subject */}
+
+                    <div className="min-w-0">
+
+                      <label
+                        htmlFor="subject"
+                        className="mb-2 block text-xs font-medium text-gray-400"
+                      >
+                        Subject
+                      </label>
+
+                      <input
+                        id="subject"
+                        required
+                        type="text"
+                        placeholder="Project discussion"
+                        value={form.subject}
+                        onChange={(event) => {
+                          setForm((previous) => ({
+                            ...previous,
+                            subject:
+                              event.target.value,
+                          }));
+
+                          setError("");
+                        }}
+                        className="
+                          h-12
+                          w-full
+                          min-w-0
+                          rounded-xl
+                          border
+                          border-white/[0.08]
+                          bg-black/20
+                          px-4
+                          text-sm
+                          text-white
+                          outline-none
+                          placeholder:text-gray-700
+                          transition
+                          focus:border-blue-500/50
+                        "
+                      />
+
+                    </div>
+
+                  </div>
+
+                  {/* =================================================
+                      MESSAGE
+                  ================================================= */}
+
+                  <div className="mt-5">
+
+                    <label
+                      htmlFor="message"
+                      className="mb-2 block text-xs font-medium text-gray-400"
+                    >
+                      Message
+                    </label>
+
+                    <textarea
+                      id="message"
+                      required
+                      rows={7}
+                      placeholder="Tell me a little about your project, opportunity or idea..."
+                      value={form.message}
+                      onChange={(event) => {
+                        setForm((previous) => ({
+                          ...previous,
+                          message:
+                            event.target.value,
+                        }));
+
+                        setError("");
+                      }}
+                      className="
+                        w-full
+                        resize-none
+                        rounded-xl
+                        border
+                        border-white/[0.08]
+                        bg-black/20
+                        px-4
+                        py-3
+                        text-sm
+                        leading-7
+                        text-white
+                        outline-none
+                        placeholder:text-gray-700
+                        transition
+                        focus:border-blue-500/50
+                      "
+                    />
+
+                  </div>
+
+                  {/* =================================================
+                      ERROR
+                  ================================================= */}
+
+                  {error && (
+                    <div
+                      className="
+                        mt-5
+                        rounded-xl
+                        border
+                        border-red-500/20
+                        bg-red-500/[0.06]
+                        px-4
+                        py-3
+                        text-sm
+                        text-red-400
+                      "
+                    >
+                      {error}
+                    </div>
+                  )}
+
+                  {/* =================================================
+                      SUBMIT
+                  ================================================= */}
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="
+                      mt-6
+                      flex
+                      h-12
+                      w-full
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded-xl
+                      bg-gradient-to-r
+                      from-blue-600
+                      to-violet-600
+                      text-sm
+                      font-semibold
+                      text-white
+                      shadow-lg
+                      shadow-blue-500/10
+                      transition
+                      duration-300
+                      hover:from-blue-500
+                      hover:to-violet-500
+                      hover:shadow-blue-500/20
+                      disabled:cursor-not-allowed
+                      disabled:opacity-50
+                    "
+                  >
+
+                    {loading ? (
+                      <>
+                        <svg
+                          className="h-5 w-5 animate-spin"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <circle
+                            cx="12"
+                            cy="12"
+                            r="9"
+                            stroke="currentColor"
+                            strokeOpacity="0.3"
+                            strokeWidth="2"
+                          />
+
+                          <path
+                            d="M21 12a9 9 0 0 0-9-9"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+
+                        Sending message...
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <SendIcon />
+                      </>
+                    )}
+
+                  </button>
+
+                  <p className="mt-3 text-center text-[11px] text-gray-700">
+                    Your information is only used to respond
+                    to your message.
+                  </p>
 
                 </div>
 
-                {/* Mobile Validation */}
-
-                {fieldErrors.mobileNumber ? (
-
-                  <p className="mt-2 text-sm leading-5 text-red-400">
-                    {fieldErrors.mobileNumber}
-                  </p>
-
-                ) : selectedCountry === "IN" ? (
-
-                  <p className="mt-2 text-xs leading-5 text-gray-500">
-                    Enter 10 digits starting with 6, 7, 8 or 9.
-                  </p>
-
-                ) : (
-
-                  <p className="mt-2 text-xs leading-5 text-gray-500">
-                    Enter 6 to 15 digits.
-                  </p>
-
-                )}
-
-              </div>
-
-
-              {/* Subject */}
-
-              <div className="min-w-0">
-
-                <label
-                  htmlFor="subject"
-                  className="mb-2 block text-sm font-medium text-gray-300"
-                >
-                  Subject
-                </label>
-
-                <input
-                  id="subject"
-                  required
-                  type="text"
-                  placeholder="Subject"
-                  value={form.subject}
-                  onChange={(event) => {
-                    setForm((previous) => ({
-                      ...previous,
-                      subject: event.target.value,
-                    }));
-
-                    setError("");
-                  }}
-                  className="
-        h-12
-        w-full
-        min-w-0
-        rounded-lg
-        border
-        border-white/10
-        bg-black/20
-        px-4
-        py-3
-        text-sm
-        text-white
-        outline-none
-        placeholder:text-gray-600
-        transition
-        focus:border-blue-500
-        sm:text-base
-      "
-                />
-
-              </div>
-
-            </div>
-
-            {/* =================================================
-                MESSAGE
-            ================================================= */}
-
-            <div>
-
-              <label
-                htmlFor="message"
-                className="mb-2 block text-sm font-medium text-gray-300"
-              >
-                Message
-              </label>
-
-              <textarea
-                id="message"
-                required
-                rows={7}
-                placeholder="Your Message"
-                value={form.message}
-                onChange={(event) => {
-                  setForm((previous) => ({
-                    ...previous,
-                    message:
-                      event.target.value,
-                  }));
-
-                  setError("");
-                }}
-                className="w-full resize-none rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-white outline-none placeholder:text-gray-600 transition focus:border-blue-500"
-              />
-
-            </div>
-
-            {/* =================================================
-                API ERROR
-            ================================================= */}
-
-            {error && (
-
-              <div className="flex items-start gap-3 rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-400">
-
-                {/* Error Icon */}
-
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mt-0.5 h-5 w-5 shrink-0"
-                >
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="9"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                  />
-
-                  <path
-                    d="M12 8V13"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                  />
-
-                  <circle
-                    cx="12"
-                    cy="16.5"
-                    r="1"
-                    fill="currentColor"
-                  />
-                </svg>
-
-                <div>
-
-                  <p className="font-medium text-red-300">
-                    Unable to send your message
-                  </p>
-
-                  <p className="mt-1 text-red-400/80">
-                    {error}
-                  </p>
-
-                </div>
-
-              </div>
+              </form>
 
             )}
 
-            {/* =================================================
-                SUBMIT BUTTON
-            ================================================= */}
+          </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3 font-medium text-white shadow-lg shadow-blue-500/10 transition hover:from-blue-500 hover:to-violet-500 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-
-              {loading ? (
-
-                <>
-                  {/* Loading Spinner */}
-
-                  <svg
-                    className="h-5 w-5 animate-spin"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="9"
-                      stroke="currentColor"
-                      strokeOpacity="0.3"
-                      strokeWidth="2"
-                    />
-
-                    <path
-                      d="M21 12a9 9 0 0 0-9-9"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-
-                  Sending...
-                </>
-
-              ) : (
-
-                "Send Message"
-
-              )}
-
-            </button>
-
-          </form>
-
-        )}
+        </div>
 
         {/* ====================================================
             RESUME
         ==================================================== */}
 
-        <div className="mt-12 rounded-2xl border border-white/10 bg-white/[0.025] p-8 text-center">
+        <div
+          className="
+            relative
+            mt-12
+            overflow-hidden
+            rounded-3xl
+            border
+            border-white/[0.08]
+            bg-white/[0.025]
+            p-8
+            text-center
+            sm:p-10
+          "
+        >
 
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">
-            Resume
-          </p>
+          <div
+            className="
+              pointer-events-none
+              absolute
+              left-1/2
+              top-0
+              h-32
+              w-64
+              -translate-x-1/2
+              rounded-full
+              bg-blue-500/[0.05]
+              blur-3xl
+            "
+          />
 
-          <h2 className="mt-3 text-2xl font-semibold text-white">
-            Want to know more about my experience?
-          </h2>
+          <div className="relative">
 
-          <p className="mx-auto mt-3 max-w-xl text-gray-400">
-            Download my latest resume to learn more about my professional
-            experience, technical skills and projects.
-          </p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-400">
+              Resume
+            </p>
 
-          <a
-            href="/resume.pdf"
-            download="Lokesh-Jawale-Resume.pdf"
-            className="mt-6 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-violet-600 px-6 py-3 font-medium text-white shadow-lg shadow-blue-500/10 transition hover:from-blue-500 hover:to-violet-500"
-          >
+            <h2 className="mt-3 text-2xl font-semibold text-white">
+              Want to know more about my experience?
+            </h2>
 
-            {/* Download Icon */}
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-gray-500">
+              Download my latest resume to learn more
+              about my professional experience, technical
+              skills and projects.
+            </p>
 
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+            <a
+              href="/resume.pdf"
+              download="Lokesh-Jawale-Resume.pdf"
+              className="
+                mt-7
+                inline-flex
+                items-center
+                gap-2
+                rounded-xl
+                bg-gradient-to-r
+                from-blue-600
+                to-violet-600
+                px-6
+                py-3
+                text-sm
+                font-semibold
+                text-white
+                shadow-lg
+                shadow-blue-500/10
+                transition
+                hover:from-blue-500
+                hover:to-violet-500
+              "
             >
-              <path
-                d="M12 3V15"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
 
-              <path
-                d="M7 11L12 16L17 11"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+              >
+                <path
+                  d="M12 3V15"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
 
-              <path
-                d="M5 21H19"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
+                <path
+                  d="M7 11L12 16L17 11"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
 
-            Download Resume
+                <path
+                  d="M5 21H19"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
 
-          </a>
+              Download Resume
+
+            </a>
+
+          </div>
 
         </div>
 
         {/* ====================================================
-            SOCIAL LINKS
+            SOCIAL FOOTER
         ==================================================== */}
 
         <div className="mt-16 text-center">
 
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-blue-400">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-400">
             Connect With Me
           </p>
 
@@ -1348,44 +1547,78 @@ export default function ContactPage() {
             Find me online
           </h2>
 
-          <div className="mt-7 flex flex-wrap justify-center gap-4">
+          <div className="mt-7 grid gap-3 sm:grid-cols-3">
 
-            {socialLinks.map(
-              (social) => (
+            {socialLinks.map((social) => (
+              <a
+                key={social.name}
+                href={social.url}
+                target={
+                  social.name === "Email"
+                    ? undefined
+                    : "_blank"
+                }
+                rel={
+                  social.name === "Email"
+                    ? undefined
+                    : "noopener noreferrer"
+                }
+                className="
+                  group
+                  flex
+                  items-center
+                  gap-4
+                  rounded-2xl
+                  border
+                  border-white/[0.08]
+                  bg-white/[0.025]
+                  p-4
+                  text-left
+                  transition
+                  duration-300
+                  hover:-translate-y-1
+                  hover:border-blue-500/20
+                  hover:bg-white/[0.04]
+                "
+              >
 
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Visit my ${social.name}`}
-                  className="group flex min-w-[190px] items-center gap-4 rounded-xl border border-white/10 bg-white/[0.025] px-5 py-4 text-left transition duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:bg-white/[0.05]"
+                <div
+                  className="
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-blue-500/[0.07]
+                    text-blue-400
+                    transition
+                    group-hover:bg-blue-500/[0.12]
+                    group-hover:text-blue-300
+                  "
                 >
+                  {social.icon}
+                </div>
 
-                  {/* Icon */}
+                <div className="min-w-0">
 
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 transition duration-300 group-hover:bg-blue-500/20 group-hover:text-blue-300">
-                    {social.icon}
-                  </div>
+                  <p className="text-sm font-medium text-white">
+                    {social.name}
+                  </p>
 
-                  {/* Text */}
+                  <p className="mt-1 truncate text-xs text-gray-600">
+                    {social.username}
+                  </p>
 
-                  <div>
+                </div>
 
-                    <p className="font-medium text-white">
-                      {social.name}
-                    </p>
+                <div className="ml-auto text-gray-700 transition group-hover:translate-x-1 group-hover:text-blue-400">
+                  <ArrowIcon />
+                </div>
 
-                    <p className="mt-1 max-w-[150px] truncate text-sm text-gray-500">
-                      {social.username}
-                    </p>
-
-                  </div>
-
-                </a>
-
-              )
-            )}
+              </a>
+            ))}
 
           </div>
 
